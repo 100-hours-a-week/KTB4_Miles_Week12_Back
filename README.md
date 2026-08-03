@@ -23,10 +23,8 @@ Bamboo Board는 사용자가 부담 없이 글을 작성하고 서로의 의견�
 - MySQL 8, H2, Flyway
 - Redis 7, Redisson
 - JWT 인증
-- Gradle
-- JUnit 5, Mockito, Testcontainers, JaCoCo
 - Docker, Nginx
-- GitHub Actions, AWS SSM
+- GitHub Actions, AWS
 
 ## 주요 기능
 
