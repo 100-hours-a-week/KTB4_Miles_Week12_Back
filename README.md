@@ -76,15 +76,12 @@ docker run --name bamboo-redis-local -p 6379:6379 -d redis:7.4-alpine redis-serv
 
 최종 운영 구조는 `B3__current_schema.sql`을 기준으로 합니다. `post_likes_seq`는 실제 물리 스키마에는 존재하지만, 좋아요 도메인 관계를 설명하는 ERD에서는 제외했습니다.
 
-ERD: [Bamboo Board Backend ERD](https://www.erdcloud.com/d/sBnm36Drq55KKnnRh)
+ERD: <img src="image.png">
 
-## 관련 저장소
+## Front-end
 
 - [Frontend Repository](https://github.com/100-hours-a-week/KTB4_Miles_Week12_Front)
 
-## 서비스 화면
-
-스크린샷 추가 예정
 
 ## 트러블 슈팅
 
@@ -99,3 +96,5 @@ ERD: [Bamboo Board Backend ERD](https://www.erdcloud.com/d/sBnm36Drq55KKnnRh)
 ## 배포
 
 GitHub Actions에서 검증과 컨테이너 이미지 빌드를 수행하고, AWS SSM으로 배포 명령을 전달합니다. 새 버전은 비활성 색상에 먼저 실행한 뒤 상태 확인이 성공하면 Nginx 연결을 전환하는 Blue/Green 방식으로 운영합니다.
+
+배포 주소는 http://54.116.128.239/login입니다.
