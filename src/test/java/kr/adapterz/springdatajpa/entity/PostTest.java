@@ -26,7 +26,6 @@ class PostTest {
                 () -> assertThat(post.getPostContent()).isEqualTo("content"),
                 () -> assertThat(post.getImageFile()).isNull(),
                 () -> assertThat(post.getPostImages()).isEmpty(),
-                () -> assertThat(post.isFixed()).isFalse(),
                 () -> assertThat(post.getPostCounter()).isNotNull(),
                 () -> assertThat(post.getPostCounter().getPost()).isEqualTo(post),
                 () -> assertThat(post.getPostViewCount()).isNotNull(),
@@ -53,7 +52,7 @@ class PostTest {
     }
 
     @Test
-    void 게시글_수정_시_제목_내용_이미지가_변경되고_수정_상태가_된다() {
+    void 게시글_수정_시_제목_내용_이미지가_변경된다() {
         Post post = new Post(createUser(), "old", "old content", "old.png");
 
         post.update("new", "new content", "new.png");
@@ -61,8 +60,7 @@ class PostTest {
         assertAll(
                 () -> assertThat(post.getPostTitle()).isEqualTo("new"),
                 () -> assertThat(post.getPostContent()).isEqualTo("new content"),
-                () -> assertThat(post.getImageFile()).isEqualTo("new.png"),
-                () -> assertThat(post.isFixed()).isTrue()
+                () -> assertThat(post.getImageFile()).isEqualTo("new.png")
         );
     }
 
@@ -136,8 +134,7 @@ class PostTest {
                 () -> assertThat(post.getPostTitle()).isEqualTo("new"),
                 () -> assertThat(post.getPostContent()).isEqualTo("new content"),
                 () -> assertThat(post.getPostImages()).hasSize(2),
-                () -> assertThat(post.getImageFile()).isEqualTo("first.png"),
-                () -> assertThat(post.isFixed()).isTrue()
+                () -> assertThat(post.getImageFile()).isEqualTo("first.png")
         );
     }
 }
