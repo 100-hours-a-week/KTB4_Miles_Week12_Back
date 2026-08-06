@@ -65,12 +65,6 @@ public class Post {
     @Column(name ="deleted", nullable = false)
     private boolean deleted;
 
-    public Post(User user, String postTitle, String postContent, String imageFile)
-    {
-        this(user, postTitle, postContent);
-        replaceImages(imageFile);
-    }
-
     public Post(User user, String postTitle, String postContent)
     {
         this.user=user;
@@ -84,35 +78,10 @@ public class Post {
     }
 
 
-    public void update(String title, String contents, String imageFile) {
-        this.postTitle = title;
-        this.postContent = contents;
-        replaceImages(imageFile);
-    }
-
     public void update(String title, String contents, List<String> imageFiles) {
         this.postTitle = title;
         this.postContent = contents;
         replaceImages(imageFiles);
-    }
-
-    // 기존 단일 이미지 응답과의 호환을 위해 첫 번째 이미지를 대표 이미지로 사용한다.
-    public String getImageFile() {
-        if (postImages == null || postImages.isEmpty()) {
-            return null;
-        }
-
-        return postImages.get(0).getImageFile();
-    }
-
-    public void replaceImages(String imageFile) {
-        postImages.clear();
-
-        if (imageFile == null || imageFile.isBlank()) {
-            return;
-        }
-
-        addImage(imageFile, 0);
     }
 
     public void replaceImages(List<String> imageFiles) {

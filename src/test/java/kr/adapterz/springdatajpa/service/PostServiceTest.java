@@ -384,14 +384,15 @@ class PostServiceTest {
         verify(entityManager, never()).lock(any(Post.class), any(LockModeType.class));
         assertThat(post.getPostTitle()).isEqualTo("title");
         assertThat(post.getPostContent()).isEqualTo("content");
-        assertThat(post.getImageFile()).isEqualTo(SAME_IMAGE);
+        assertThat(post.getPostImages().get(0).getImageFile()).isEqualTo(SAME_IMAGE);
     }
 
     @Test
     void 제목과_내용이_같아도_이미지가_다르면_실제_수정으로_처리한다() {
         Long postId = 1L;
         Long writerId = 1L;
-        Post post = createPost(postId, createUser(writerId), SAME_IMAGE);
+        Post post = createPost(postId, createUser(writerId));
+        post.replaceImages(List.of(SAME_IMAGE));
         PostFixRequestDto request = createPostFixRequest(
                 "title",
                 "content",
@@ -404,7 +405,7 @@ class PostServiceTest {
         postService.fixPost(postId, writerId, request);
 
         verify(entityManager).lock(post, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
-        assertThat(post.getImageFile()).isEqualTo(NEW_IMAGE);
+        assertThat(post.getPostImages().get(0).getImageFile()).isEqualTo(NEW_IMAGE);
     }
 
     @Test
@@ -668,12 +669,6 @@ class PostServiceTest {
 
     private Post createPost(Long postId, User user) {
         Post post = new Post(user, "title", "content");
-        ReflectionTestUtils.setField(post, "postId", postId);
-        return post;
-    }
-
-    private Post createPost(Long postId, User user, String imageFile) {
-        Post post = new Post(user, "title", "content", imageFile);
         ReflectionTestUtils.setField(post, "postId", postId);
         return post;
     }
