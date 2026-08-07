@@ -66,7 +66,7 @@ deploy
 
 ## 데이터베이스 구조
 
-최종 운영 구조는 `B3__current_schema.sql`에 V4 변경을 적용한 상태입니다. `post_counters`에는 좋아요·신고·댓글 수만 저장하고, 조회수는 `post_view_counts`로 분리했습니다. 기존 `post_counters.view_count` 컬럼은 `V4__remove_legacy_post_counter_view_count.sql`에서 제거합니다. `post_likes_seq`는 Hibernate가 좋아요 식별자를 생성할 때 사용하는 물리 테이블이지만, 좋아요 도메인 관계를 설명하는 ERD에서는 제외했습니다.
+최종 운영 구조는 `B3__current_schema.sql`에 V6 변경을 적용한 상태입니다. `post_counters`에는 좋아요·신고·댓글 수만 저장하고, 조회수는 `post_view_counts`로 분리했습니다. 기존 `post_counters.view_count` 컬럼은 `V4__remove_legacy_post_counter_view_count.sql`에서 제거하고, 좋아요 ID는 MySQL `AUTO_INCREMENT`를 사용하도록 `V6__use_identity_for_post_likes.sql`에서 통일했습니다. 이에 따라 Hibernate 보조 테이블인 `post_likes_seq`는 제거했습니다.
 
 ### 요구사항 분석
 유저
