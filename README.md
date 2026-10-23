@@ -40,29 +40,7 @@ Bamboo Board는 사용자가 부담 없이 글을 작성하고 서로의 의견�
 - MySQL 분리 조회수 테이블 반영
 - Blue/Green 방식 백엔드 배포
 
-## 폴더 구조
 
-```text
-src/main/java/kr/adapterz/springdatajpa
-├── auth          # JWT와 인증 세션
-├── config        # 보안, CORS, 조회수 설정
-├── controller    # HTTP API 진입점
-├── dto           # 요청·응답 객체
-├── entity        # JPA 엔티티
-├── exception     # 예외 정의
-├── repository    # 데이터 접근 계층
-├── service       # 비즈니스 로직과 조회수 반영 스케줄러
-└── validation    # 입력값 검증
-
-src/main/resources
-├── db/migration  # Flyway 스키마와 변경 이력
-└── application*.yaml
-
-deploy
-├── compose.yaml          # Redis, Blue/Green 백엔드, Nginx 구성
-├── deploy-backend.sh     # 배포 색상 전환 스크립트
-└── nginx                 # Blue/Green upstream 설정
-```
 
 ## 데이터베이스 구조
 
